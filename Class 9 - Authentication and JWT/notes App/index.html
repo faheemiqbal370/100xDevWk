@@ -1,0 +1,67 @@
+<html>
+    <head>
+        <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>   
+    </head>
+
+
+    <body>
+        <div style="display: flex; justify-content: space-between; padding: 0px 100px;">
+
+        <div id="notes">
+            Loading....
+        </div>
+
+        <div>
+            <input type="text" id="userNote"/>
+            <button onclick="addTodo()">Create new note</button>
+        </div>
+    </div>
+
+
+    <script>
+
+      async  function getTodos(){
+            const res = await axios.get("http://localhost:3000/notes",{
+                headers: {
+                    token: localStorage.getItem("token")                // get the token from local request
+                }
+            });   //gets the res from be
+          
+
+            document.getElementById("notes").innerHTML = "";              // change innerhtml to empty ie removes loading
+            
+
+            const notes = res.data.notes;
+            for(let i =0; i < notes.length; i++){                         // goes to each note and display it one after another 
+                const noteNote = document.createElement("div");           // create a new <div> for each note
+                noteNote.innerHTML = notes[i].note;                             // Put note text inside the div gwtting the note from notes array
+                document.getElementById("notes").appendChild(noteNote);    // Add that div to the page inside element with id="notes"
+ 
+            }
+        }
+        getTodos();             // this function gets called on load
+
+
+        async function addTodo() {
+            axios.post("http://localhost:3000/notes", {
+                notes: document.getElementById("userNote").value              // send todo to BE 
+            }, {
+                headers: {
+                    token: localStorage.getItem("token")                // get the token from local request
+                }
+            });
+
+            // notes: document.getElementById("userNote").value = ""             //emptiyes the textbox
+
+                                                                      
+            const newNode = document.createElement("div");                  // show new note on frontEnd
+
+            newNode.innerHTML = document.getElementById("userNote").value;
+            newNode.setAttribute("style","border: 2px solid black; padding: 10px")
+            document.getElementById("userNote").value = " "
+
+
+        }
+    </script>       
+    </body>
+</html>

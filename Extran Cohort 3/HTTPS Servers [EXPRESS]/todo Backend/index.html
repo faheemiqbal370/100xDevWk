@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Todo App</title>
+</head>
+<body>
+
+    <h2>Todo App</h2>
+
+    <!-- User ID input -->
+    <input id="userId" placeholder="Enter User ID" />
+    <br><br>
+
+    <!-- Add todo -->
+    <input id="title" placeholder="Enter Todo" />
+    <button onclick="addTodo()">Add</button>
+
+    <br><br>
+
+    <button onclick="getTodos()">Show Todos</button>
+
+    <ul id="list"></ul>
+
+<script>
+    const baseUrl = "http://localhost:3000";
+
+    function addTodo() {
+        const userId = document.getElementById("userId").value;
+        const title = document.getElementById("title").value;
+
+        fetch(`${baseUrl}/${userId}`, {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify({ title: title })
+        })
+        .then(res => res.json())
+        .then(data => {
+            displayTodos(data);
+        });
+    }
+
+    function getTodos() {
+        const userId = document.getElementById("userId").value;
+
+        fetch(`${baseUrl}/${userId}`)
+        .then(res => res.json())
+        .then(data => {
+            displayTodos(data);
+        });
+    }
+
+    function deleteTodo(userId, todoId) {
+        fetch(`${baseUrl}/${userId}/${todoId}`, {
+            method: "DELETE"
+        })
+        .then(res => res.json())
+        .then(data => {
+            displayTodos(data);
+        });
+    }
+
+    function displayTodos(todos) {
+        const list = document.getElementById("list");
+        list.innerHTML = "";
+
+        todos.forEach(todo => {
+            const li = document.createElement("li");
+            li.innerText = todo.title;
+
+            const btn = document.createElement("button");
+            btn.innerText = "Delete";
+            btn.onclick = () => deleteTodo(
+                document.getElementById("userId").value,
+                todo.id
+            );
+
+            li.appendChild(btn);
+            list.appendChild(li);
+        });
+    }
+</script>
+
+</body>
+</html>

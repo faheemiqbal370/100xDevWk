@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Test</title>
+</head>
+<body>
+
+<button onclick="button()">Click me</button>
+
+// used in FrontEnd to run axios 
+<script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+<script>
+    // const axios = require("axios"); // no need to write this in FrontEnd
+    // Click button → JS runs → fetch("/todos") → backend sends JSON → JS processes → YOU display length
+
+// Fetch way 
+async function button() {
+   
+    const res = await fetch("http://localhost:3000/todos");
+    const json = await res.json();
+    console.log(json.todos.length);
+
+// Axios Way 
+    async function main (){
+
+        const response = await axios.get("http://localhost:3000/todos");
+        console.log(response.todos.length);
+
+    }
+}
+ async function main (){
+
+        const response = await axios.post("http://localhost:3000/todos",
+        {
+            username : "Faheem"
+        },
+        {
+            headers: {
+                auth: "123"
+            },
+        },
+        );
+        console.log(response.data);
+
+    }
+
+
+
+</script>
+
+</body>
+</html>

@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html>
+<body>
+
+<input id="First" type="text" placeholder="First number"/>
+<input id="Second" type="text" placeholder="Second number"/>
+
+<button onclick="add()">Add</button>
+<button onclick="sub()">Subtract</button>
+<button onclick="mul()">Multiply</button>
+<button onclick="div()">Divide</button>
+
+<div id="response"></div>
+
+<script>
+    async function add() {
+            const a = document.getElementById("First").value;
+            const b = document.getElementById("Second").value;
+
+            const res = await fetch("http://localhost:3000/sum/" + a + "/" + b); // gets values inputed in this url when button is clicked
+            const json = await res.json(); // changes the response recieved to json
+
+            document.getElementById("response").innerHTML = json.ans;
+            
+        }
+
+        async function sub() {
+            const a = document.getElementById("First").value;
+            const b = document.getElementById("Second").value;
+
+            const res = await fetch("http://localhost:3000/sub/" + a + "/" + b); // gets values inputed in this url when button is clicked
+            const json = await res.json(); // changes the response recieved to json
+
+            document.getElementById("response").innerHTML = json.ans; //t takes the value json.ans and shows it inside the HTML element with id "response"
+            
+        }
+
+        async function mul() {
+            const a = document.getElementById("First").value;
+            const b = document.getElementById("Second").value;
+
+            const res = await fetch("http://localhost:3000/mul/" + a + "/" + b); // gets values inputed in this url when button is clicked
+            const json = await res.json(); // changes the response recieved to json
+
+            document.getElementById("response").innerHTML = json.ans;
+            
+        }
+
+        async function div() {
+            const a = document.getElementById("First").value;
+            const b = document.getElementById("Second").value;
+
+            const res = await fetch("http://localhost:3000/div/" + a + "/" + b); // gets values inputed in this url when button is clicked
+            const json = await res.json(); // changes the response recieved to json
+
+            document.getElementById("response").innerHTML = json.ans;
+            
+        }
+</script>
+
+</body>
+</html>

@@ -1,0 +1,27 @@
+    body {
+            background-color: rgb(73, 68, 68);
+            color: whitesmoke;
+            font-size: 16;
+            /* background-color: ; */
+        }
+
+        #topbar{
+            font-family: gravitas-one-regular;
+            background-color: 2c3f5a;
+             padding: 2px 10px; 
+             margin: 20px 30px;
+        }
+
+        #tool{
+            background-color: #2c3f5a;
+             /* border: 1px solid #5473a1;  */
+             /* box-shadow: 2px 2px 10px 10px red;  */
+        }
+        #button:hover{
+            background-color: aliceblue;
+            margin: 2px 33px 2px 33px;
+            color: black;
+            padding: 2px;
+            cursor: pointer;
+            transition: width 2s, height 2s, background-color 3s, transform 2s;
+        }

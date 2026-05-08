@@ -1,0 +1,34 @@
+users = array storing all registered users
+
+user = single user object taken from users array while searching/checking
+
+notes = array storing all notes OR key name sent in request body
+
+note = single note text coming from request body
+
+username1/password1 = current username and password coming from frontend request body
+
+username/password = properties stored inside user object
+
+username = property inside decoded JWT token or stored user object
+
+token = JWT token used to identify logged-in user
+
+decoded = decoded JWT object after verification
+
+username1 = username extracted from decoded JWT token
+
+userNotes = filtered notes belonging to currently logged-in user
+
+req = request object coming from frontend
+res = response object sent back to frontend
+
+app = express application/server object
+
+jwt = jsonwebtoken package used to create and verify JWT tokens
+
+path = path module used to safely access file paths
+
+userExists = stores result of checking whether user already exists
+
+userNote = frontend HTML input id used to type note text
