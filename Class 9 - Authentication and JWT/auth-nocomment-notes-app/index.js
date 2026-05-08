@@ -1,6 +1,7 @@
 const express = require("express");
 const jwt = require("jsonwebtoken");
 const { authMiddleware } = require("./middleware");
+const path = require('path');
 
 const app = express();
 app.use(express.json());
@@ -11,10 +12,8 @@ const users = [{
     password: "123123"
 }];
 
-
-
 app.post("/signup", function(req, res) {
-    const username = req.body.username;  // harkirat
+    const username = req.body.username;  
     const password = req.body.password;
     const userExists = users.find(user => user.username === username);
     if (userExists) {
@@ -80,15 +79,15 @@ app.get("/notes", authMiddleware, function(req, res) {
 })
 
 app.get("/", function(req, res) {
-    res.sendFile("/Users/harkirat/Projects/bootcamp/week-9-notes-app/frontend/index.html")
+    res.sendFile(path.join(__dirname,"index.html"))
 })
 
 app.get("/signup", function(req, res) {
-    res.sendFile("/Users/harkirat/Projects/bootcamp/week-9-notes-app/frontend/signup.html")
+     res.sendFile(path.join(__dirname,"signup.html"))
 })
 
 app.get("/signin", function(req, res) {
-    res.sendFile("/Users/harkirat/Projects/bootcamp/week-9-notes-app/frontend/signin.html")
+     res.sendFile(path.join(__dirname,"signin.html"))
 })
 
 app.listen(3000);
